@@ -62,7 +62,7 @@ export default function PostCard({
             <p className="text-xs text-slate-400">{formatDate(createdAt)}</p>
           </div>
         </div>
-        {user?._id === _id && <Dropdown postId={postId} />}
+        {user?._id === _id && <Dropdown postId={postId} postBody={body ?? ""} />}
       </div>
 
       {/* Body */}
