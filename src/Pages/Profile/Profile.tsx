@@ -11,6 +11,8 @@ import PostCard from "../../Components/PostCard/PostCard.tsx";
 import type { postInterface } from "../../Interface/InterfacePost.ts";
 import CreatePost from "../../Components/CreatePost/CreatePost.tsx";
 import { Helmet } from "react-helmet";
+import PasswordDropdown from "../../Components/PasswordDropdown/PasswordDropdown.tsx";
+import UpdateProfilePhoto from "../../Components/UpdateProfilePhoto/UpdateProfilePhoto.tsx";
 
 export default function Profile() {
   const auth = useContext(userContext) as userType;
@@ -25,7 +27,11 @@ export default function Profile() {
     });
   }
 
-  const { data: postsUser, isLoading, isError } = useQuery({
+  const {
+    data: postsUser,
+    isLoading,
+    isError,
+  } = useQuery({
     queryFn: getUserPosts,
     queryKey: ["userPosts"],
     select: (res) => res.data.data.posts,
@@ -50,11 +56,7 @@ export default function Profile() {
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-2xl mx-auto">
           <div className="h-44 sm:h-52 overflow-hidden">
-            <img
-              src={user?.cover || imgCover}
-              alt="Cover"
-              className="w-full h-full object-cover"
-            />
+            <img src={user?.cover || imgCover} alt="Cover" className="w-full h-full object-cover" />
           </div>
           <div className="px-5 pb-5">
             <div className="flex items-end gap-4 -mt-12">
@@ -63,6 +65,9 @@ export default function Profile() {
                 alt={user?.name}
                 className="w-24 h-24 rounded-2xl object-cover ring-4 ring-white shadow-md"
               />
+              <div>
+                <UpdateProfilePhoto />
+              </div>
               <div className="pb-1">
                 <h1 className="text-xl font-bold text-slate-900">{user?.name}</h1>
                 <p className="text-sm text-slate-500">@{user?.username}</p>
@@ -80,6 +85,9 @@ export default function Profile() {
               <div>
                 <span className="font-bold text-slate-800">{postsUser?.length ?? 0}</span>
                 <span className="text-slate-500 ml-1">Posts</span>
+              </div>
+              <div className="ml-auto">
+                <PasswordDropdown />
               </div>
             </div>
           </div>

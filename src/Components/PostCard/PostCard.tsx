@@ -11,6 +11,7 @@ import type { userType } from "../../Interface/InterfaceUser.ts";
 import { userContext } from "../../context/UserContext.tsx";
 import Like from "../LIke/Like.tsx";
 import { FiMessageCircle } from "react-icons/fi";
+import CommentDropdown from "../CommentDropdown/CommentDropdown.tsx";
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
@@ -125,7 +126,10 @@ export default function PostCard({
                   />
                   <div className="bg-slate-50 rounded-xl px-3 py-2 flex-1">
                     <p className="text-xs font-semibold text-slate-700">{comment.commentCreator?.name}</p>
-                    <p className="text-sm text-slate-600 mt-0.5">{comment.content}</p>
+                    <p className="text-sm text-slate-600 mt-0.5">{comment.content}</p>{" "}
+                    {comment._id == postId ? (
+                      <CommentDropdown postId={postId} commentId={comment._id} commentContent={comment.content} />
+                    ) : null}
                   </div>
                 </div>
               ),
@@ -138,9 +142,14 @@ export default function PostCard({
               alt={topComment.commentCreator?.name}
               className="w-7 h-7 rounded-full object-cover shrink-0 mt-0.5"
             />
-            <div className="bg-slate-50 rounded-xl px-3 py-2 flex-1">
+            <div className="bg-slate-50 fle rounded-xl px-3 py-2 flex-1">
               <p className="text-xs font-semibold text-slate-700">{topComment.commentCreator?.name}</p>
-              <p className="text-sm text-slate-600 mt-0.5">{topComment.content}</p>
+              <div className="flex justify-between">
+                <p className="text-sm text-slate-600 mt-0.5">{topComment.content}</p>
+                {topComment?.commentCreator?._id === user._id ? (
+                  <CommentDropdown postId={postId} commentId={topComment._id} commentContent={topComment.content} />
+                ) : null}
+              </div>
             </div>
           </div>
         ) : (
