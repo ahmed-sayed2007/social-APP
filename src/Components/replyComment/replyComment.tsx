@@ -45,7 +45,7 @@ export default function ReplyComment({ postId, commentId, onClose }: ReplyCommen
     });
   }
 
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: replyComment,
 
     mutationKey: ["replyComment", commentId],
@@ -80,7 +80,6 @@ export default function ReplyComment({ postId, commentId, onClose }: ReplyCommen
           onChange={(e) => {
             setContent(e.target.value);
           }}
-          minRows={4}
         />
 
         <Input
@@ -97,7 +96,6 @@ export default function ReplyComment({ postId, commentId, onClose }: ReplyCommen
 
           <Button
             className="text-sky-500"
-            isLoading={isPending}
             onClick={() => {
               if (!content.trim()) {
                 toast.error("Reply cannot be empty");

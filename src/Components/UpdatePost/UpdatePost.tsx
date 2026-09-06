@@ -1,6 +1,6 @@
 import { Button, TextArea, Input } from "@heroui/react";
 
-import { type ChangeEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 import axios from "axios";
 

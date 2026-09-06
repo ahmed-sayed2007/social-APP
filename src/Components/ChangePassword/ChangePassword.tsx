@@ -50,7 +50,7 @@ export default function ChangePassword({ onClose }: ChangePasswordProps) {
     );
   }
 
-  const { mutate, isPending } = useMutation<unknown, AxiosError<ErrorResponse>>({
+  const { mutate } = useMutation<unknown, AxiosError<ErrorResponse>>({
     mutationFn: changePassword,
 
     mutationKey: ["changePassword"],
@@ -131,10 +131,8 @@ export default function ChangePassword({ onClose }: ChangePasswordProps) {
         <div className="flex flex-col gap-4">
           <Input
             type="password"
-            label="Current password"
             placeholder="Enter your current password"
             value={password}
-            isDisabled={isPending}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -142,10 +140,8 @@ export default function ChangePassword({ onClose }: ChangePasswordProps) {
 
           <Input
             type="password"
-            label="New password"
             placeholder="Enter your new password"
             value={newPassword}
-            isDisabled={isPending}
             onChange={(e) => {
               setNewPassword(e.target.value);
             }}
@@ -153,10 +149,8 @@ export default function ChangePassword({ onClose }: ChangePasswordProps) {
 
           <Input
             type="password"
-            label="Confirm new password"
             placeholder="Re-enter your new password"
             value={confirmPassword}
-            isDisabled={isPending}
             onChange={(e) => {
               setConfirmPassword(e.target.value);
             }}
@@ -164,11 +158,9 @@ export default function ChangePassword({ onClose }: ChangePasswordProps) {
         </div>
 
         <div className="mt-6 flex justify-end gap-3">
-          <Button onClick={onClose} disabled={isPending}>
-            Cancel
-          </Button>
+          <Button onClick={onClose}>Cancel</Button>
 
-          <Button className="text-sky-500" isLoading={isPending} onClick={handleSubmit}>
+          <Button className="text-sky-500" onClick={handleSubmit}>
             Change Password
           </Button>
         </div>

@@ -46,7 +46,7 @@ export default function UpdateComment({ postId, commentId, oldContent, onClose }
     });
   }
 
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: updateComment,
 
     mutationKey: ["updateComment", commentId],
@@ -81,7 +81,6 @@ export default function UpdateComment({ postId, commentId, oldContent, onClose }
           onChange={(e) => {
             setContent(e.target.value);
           }}
-          minRows={4}
         />
 
         <Input
@@ -98,7 +97,6 @@ export default function UpdateComment({ postId, commentId, oldContent, onClose }
 
           <Button
             className="text-sky-500"
-            isLoading={isPending}
             onClick={() => {
               if (!content.trim()) {
                 toast.error("Comment cannot be empty");

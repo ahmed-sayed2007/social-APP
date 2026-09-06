@@ -22,7 +22,7 @@ interface ErrorResponse {
 const MAX_FILE_SIZE_MB = 5;
 const ACCEPTED_TYPES = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 
-export default function UpdateProfilePhoto({ currentPhotoUrl, onSuccess }: UpdateProfilePhotoProps) {
+export default function UpdateProfilePhoto({ onSuccess }: UpdateProfilePhotoProps) {
   const auth = useContext(tokenContext);
 
   if (!auth) {
@@ -33,7 +33,7 @@ export default function UpdateProfilePhoto({ currentPhotoUrl, onSuccess }: Updat
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [previewUrl, setPreviewUrl] = useState<string | undefined>(currentPhotoUrl);
+  // const [previewUrl, setPreviewUrl] = useState<string | undefined>(currentPhotoUrl);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   function uploadPhoto() {
@@ -71,7 +71,7 @@ export default function UpdateProfilePhoto({ currentPhotoUrl, onSuccess }: Updat
       toast.error(message);
 
       // revert preview back to the last confirmed photo on failure
-      setPreviewUrl(currentPhotoUrl);
+      // setPreviewUrl(currentPhotoUrl);
       setSelectedFile(null);
     },
   });
@@ -92,7 +92,7 @@ export default function UpdateProfilePhoto({ currentPhotoUrl, onSuccess }: Updat
     }
 
     setSelectedFile(file);
-    setPreviewUrl(URL.createObjectURL(file));
+    // setPreviewUrl(URL.createObjectURL(file));
 
     mutate();
   }
